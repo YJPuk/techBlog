@@ -1,4 +1,4 @@
-// Authentication middleware
+// Authentication middleware to ensure users logged in
 const withAuth = (req, res, next) => {
     if (!req.session.userId) {
       res.redirect("/login");
