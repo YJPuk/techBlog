@@ -30,14 +30,14 @@ router.post("/login", (req, res) => {
     }
   }).then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'No user account found!' });
+      res.status(400).json({ message: 'Incorrect username or password' });
       return;
     }
 
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect password!' });
+      res.status(400).json({ message: 'Incorrect username or password' });
       return;
     }
 
@@ -46,7 +46,7 @@ router.post("/login", (req, res) => {
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
   
-      res.json({ user: dbUserData, message: 'You are now logged in!' });
+      res.json({ user: dbUserData, message: 'Logged in' });
     });
   });
 });
@@ -72,7 +72,7 @@ router.delete("/user/:id", (req, res) => {
   })
   .then(dbUserData => {
     if (!dbUserData) {
-      res.status(404).json({ message: 'No user found with this id' });
+      res.status(404).json({ message: 'No user found' });
       return;
     }
     res.json(dbUserData);

@@ -12,7 +12,7 @@ router.get("/", withAuth, (req, res) => {
       .then(dbPostData => {
         const posts = dbPostData.map((post) => post.get({ plain: true }));
         
-        res.render("all-posts-admin", {
+        res.render("all-posts-task", {
           layout: "dashboard",
           posts
         });
