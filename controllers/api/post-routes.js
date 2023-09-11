@@ -1,9 +1,8 @@
 const router = require("express").Router();
 const { Post } = require("../../models/");
-//practically everything will require authentication here
 const withAuth = require("../../utils/auth");
 
-//posting a post
+// Create Post
 router.post("/", withAuth, (req, res) => {
   const body = req.body;
   console.log(req.session.userId);
@@ -16,7 +15,7 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
-//editing post
+//Update Post
 router.put("/:id", withAuth, (req, res) => {
   console.log(req.body, req.params.id)
   Post.update(req.body, {
@@ -36,7 +35,7 @@ router.put("/:id", withAuth, (req, res) => {
     });
 });
 
-//deleting a post
+//Delete Post
 router.delete("/:id", withAuth, (req, res) => {
   console.log(req.body, req.params.id)
   Post.destroy({

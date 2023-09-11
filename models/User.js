@@ -2,22 +2,21 @@ const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection.js');
 
-//User model
+// User Model
+//Hooks for hashing passsword or verfying hashed password via bcrypt
 class User extends Model {
-  //password check
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
 
-// Define table columns and configuration
 User.init(
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true, //primary key
-      autoIncrement: true //auto increment
+      primaryKey: true,
+      autoIncrement: true
     },
     username: {
       type: DataTypes.STRING,
@@ -27,7 +26,7 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [4] //passwords need to be at least 4 characters
+        len: [4]
       }
     }
   },

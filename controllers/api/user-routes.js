@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../../models");
 
-//create user
+//Create User
 router.post("/", (req, res) => {
   User.create({
     username: req.body.username,
@@ -22,7 +22,8 @@ router.post("/", (req, res) => {
   });
 });
 
-//logging in
+//Login Post
+//Checks password and user
 router.post("/login", (req, res) => {
   User.findOne({
     where: {
@@ -30,14 +31,14 @@ router.post("/login", (req, res) => {
     }
   }).then(dbUserData => {
     if (!dbUserData) {
-      res.status(400).json({ message: 'Incorrect username or password' });
+      res.status(400).json({ message: 'No user account found!' });
       return;
     }
 
     const validPassword = dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res.status(400).json({ message: 'Incorrect username or password' });
+      res.status(400).json({ message: 'Incorrect password!' });
       return;
     }
 
@@ -46,12 +47,11 @@ router.post("/login", (req, res) => {
       req.session.username = dbUserData.username;
       req.session.loggedIn = true;
   
-      res.json({ user: dbUserData, message: 'Logged in' });
+      res.json({ user: dbUserData, message: 'You are now logged in!' });
     });
   });
 });
 
-//logout, session destroy to log out
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
@@ -63,7 +63,7 @@ router.post('/logout', (req, res) => {
   }
 });
 
-//delete user
+//Delete User
 router.delete("/user/:id", (req, res) => {
   User.destroy({
     where: {
@@ -72,7 +72,7 @@ router.delete("/user/:id", (req, res) => {
   })
   .then(dbUserData => {
     if (!dbUserData) {
-      res.status(404).json({ message: 'No user found' });
+      res.status(404).json({ message: 'No user found with this id' });
       return;
     }
     res.json(dbUserData);

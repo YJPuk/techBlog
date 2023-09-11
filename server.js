@@ -1,8 +1,7 @@
 const path = require("path");
-const routes = require('./controllers');
-const helpers = require('./utils/helpers');
 const express = require("express");
 const session = require("express-session");
+const helpers = require('./utils/helpers');
 const exphbs = require("express-handlebars");
 
 const app = express();
@@ -11,14 +10,15 @@ const PORT = process.env.PORT || 3001;
 const sequelize = require("./config/connection.js");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+//Cookie session last an hour
 const sess = {
-    secret: "Super secret secret",
-    cookie: { maxAge: 2 * 24 * 60 * 60 * 1000 }, // 2 days in ms
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-      db: sequelize
-    })
+  secret: "Super secret secret",
+  cookie: { maxAge: 3600000 },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
 };
 
 app.use(session(sess));
@@ -32,8 +32,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(routes);
+app.use(require('./controllers/'));
 
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Server on port ${PORT}!`));
+  app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
 });
