@@ -10,6 +10,7 @@ class User extends Model {
   }
 }
 
+//3 Columns, id, username, password
 User.init(
   {
     id: {

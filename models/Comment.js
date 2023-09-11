@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 
 class Comment extends Model {}
 
+// Comment contains body only
 Comment.init(
   {
     body: {
