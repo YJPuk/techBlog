@@ -1,6 +1,19 @@
 # 14 Model-View-Controller (MVC): Tech Blog
 
-## Your Task
+<hr>
+
+## Description
+
+As coding student I'm trying to create a simple CMS-Style Blog site to match the Acceptance Criteria listed in the task below. 
+
+This was built using HTML, CSS, Javascript, Node.js, Express.js, Handlebars, dotenv, mySQL2, Sequelize, bcrypt and love.
+
+## Deployed on
+Heroku: https://arcane-taiga-54130-6421a3fd35e2.herokuapp.com/
+
+Repository: https://github.com/YJPuk/techBlog
+
+<hr>
 
 Writing about tech can be just as important as making it. Developers spend plenty of time creating new applications and debugging existing codebases, but most developers also spend at least some of their time reading and writing about technical concepts, recent advancements, and new technologies. A simple Google search for any concept covered in this course returns thousands of think pieces and tutorials from developers of all skill levels!
 
@@ -56,7 +69,7 @@ THEN I am able to view posts and comments but I am prompted to log in again befo
 
 The following animation demonstrates the application functionality:
 
-![Animation cycles through signing into the app, clicking on buttons, and updating blog posts.](./Assets/14-mvc-homework-demo-01.gif) 
+![Animation cycles through signing into the app, clicking on buttons, and updating blog posts.](./screenshot/example.gif) 
 
 ## Getting Started
 
